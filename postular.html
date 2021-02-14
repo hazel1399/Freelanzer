@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,8 +19,8 @@
             </button>
             <div class="collapse navbar-collapse" id="expand">
                 <ul class="navbar-nav">                	
-                    <li class="nav-item"><a href="index.html" class="nav-link">Freelancer</a></li>
-                    <li class="nav-item"><a href="postular.html" class="nav-link">Postularse</a></li>                                                                                             
+                    <li class="nav-item"><a href="index.html" class="nav-link">Freelancer</a></li>                    
+                    <li class="nav-item"><a href="postular.html" class="nav-link">Postularse </a></li>                                                                             
                     <div class="pull-right"> 
                         <li class="nav-item"><a href="registro.html" class="nav-link"><i class="fas fa-user-plus"></i> Registrarse </a>                                            
                     </div>    
@@ -32,43 +33,100 @@
     </header>    
 <br>	
 </body>
-<div class="jumbotron text-center" style="border: 0px white">
-    <div class="row">                           
-        <div class="container mt-3">
-            <h2> ¿qué tipo de freelancer necesitas? </h2>
-            <div id="myCarousel" class="carousel slide" data-ride="carousel">
-            
-                            
-              <!-- The slideshow -->
-              <div class="carousel-inner">
-                <div class="carousel-item active">
-                  <img src="imagenes/work.jpg" alt="work" width="1100" height="500">
+<div class="row row-cols-3 row-cols-sm-3 row-cols-md-2">
+    <div class="col-md-3 col-sm-2 col-1"></div>
+    <div class="col-md-6 col-sm-8 col-10 marco-form ">
+        <h2 class=" login-title text-center">Postularse como freelancer</h2>
+
+        <div class="login-message text-center">
+            ¿Ya tienes una cuenta?
+            <!-- <a href="#">Iniciar sesión</a> -->
+            <a href="index.html" data-dismiss="modal" data-toggle="modal" data-target="#modal-login">Login</a>
+        </div>
+
+        <div class="inputs-forms">
+            <br>
+            <!-- En action usamos $_SERVER para que los datos del form se envien a la vista en la que se encuentra -->
+            <form method="POST" action="<?php $_SERVER['PHP_SELF'] ?>" role="form" id="form-register" onsubmit="verificarcaptcha()">
+                <div class="informacion">
+                    <div class="form-group">
+                        <label for="nombre">Nombres</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="apellido">Apellidos</label>
+                        <input type="text" class="form-control" id="apellido" name="apellido">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cedula">Cédula</label>
+                        <input type="number" class="form-control" id="cedula" name="cedula" min="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telefono">Teléfono</label>
+                        <input id="telefono" class="form-control" type="number" name="telefono" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="descripcion">descripcion de sus conocimientos</label>
+                        <input type="text" class="form-control" id="descripcion" name="descripcion">
+                    </div>                    
+                    <div class="form-group genero mb-0">
+                        <label style="width: 100%" class="mb-0">Seleccione su género</label>
+                        <div class="radios" style="width: 100%">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="genero" id="masculino" value="M">
+                                <label class="form-check-label" for="inlineRadio1">Masculino</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="genero" id="femenino" value="F">
+                                <label class="form-check-label" for="inlineRadio2">Femenino</label>
+                            </div>                            
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <label for="fecha_nac">Fecha de nacimiento</label>
+                        <input type="date" id="fecha_nac" class="form-control" name="fecha_nac">
+                    </div>
                 </div>
-                <div class="carousel-item">
-                  <img src="imagenes/portatil.jpg" alt="portatil" width="1100" height="500">
+                <div class="claves">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input id="email" class="form-control" type="email" name="email">
+                    </div>
+                    <div class="form-group mb-0">
+                        <label for="clave">Contraseña</label>
+                    </div>
+                    <div class="form-group" style="position: relative">
+                        <input id="clave" class="form-control" type="password" name="clave"
+                            placeholder="Contraseña nueva">
+                        <i class="fa fa-eye btn-show-hide-pwd" data-for="clave"></i>
+                    </div>
+                    <div class="form-group" style="position: relative">
+                        <input id="reclave" class="form-control" type="password" name="reclave"
+                            placeholder="Repita la contraseña">
+                        <i class="fa fa-eye btn-show-hide-pwd" data-for="reclave"></i>
+                    </div>
+                    <div aling="center " class="g-recaptcha" data-theme="dark"
+                        data-sitekey="6LfMydkUAAAAAJ-7II57ff7mCdJ-G45XIvFv44NX"></div>
                 </div>
-                <div class="carousel-item">
-                  <img src="imagenes/people.jpg" alt="people" width="1100" height="500">
-                </div>
-              </div>
-              
-              <!-- Left and right controls -->
-              <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
-              </a>
-              <a class="carousel-control-next" href="#myCarousel" data-slide="next">
-                <span class="carousel-control-next-icon"></span>
-              </a>
-            </div>
-            <div class="buscar">
-                <input type="text" class="buscar_texto" placeholder="  Escribe lo que buscas ">
-                <a href="buscador.html" class="boton">
-                    <i class="fas fa-search"></i>
-                </a>
-            </div>
-            </div>
+                <button name="enviar" type="submit" class="btn btn-primary btn mt-3"
+                    style="width: 100%" >Registrar</button>
+            </form>
+        </div>
     </div>
+    <div class="col-md-3 col-sm-2 col-1"></div>
 </div>
+</body>
+<br><br>
+<script type="text/javascript">
+$(document).ready(function() {
+$('.navbar-nav').find('a.active').removeClass('active');
+});
+</script>
+
 <footer>
     <div class="container">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 mb-0">
@@ -136,3 +194,6 @@
     </div>
 </footer>
 </html>
+
+
+

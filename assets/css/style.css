@@ -1,0 +1,129 @@
+body{
+  margin: 0;
+  padding: 0;
+  background-color: gray;
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+}
+
+.menu{
+	position: absolute;
+	float: left;
+	background-color: grey;
+	color: white;
+}
+.menu li:hover{
+	background-color: white;
+	color: black;
+}
+.pull-right {
+  position: right;
+  float: right;
+}
+footer {
+    background: rgb(67, 149, 209) !important;
+    margin-top: 6% !important;
+    padding: 5% 3% 3% 3%;
+  }
+  
+  footer .iconos a {
+    line-height: 1.5;
+    color: #ffffff;
+    text-align: center !important;
+    font-size: 24px !important;
+    padding-top: 16px !important;
+    padding-bottom: 16px !important;
+    text-decoration: none;
+    list-style: none;
+    font-family: "Raleway", sans-serif !important;
+    transition: 0.2s;
+  }
+  
+  footer .iconos i {
+    transition: 0.2s;
+  }
+  
+  footer .iconos a:hover,
+  footer .iconos i:hover {
+    color: #282562;
+    transform: scale(1.2);
+  }
+  
+  footer .contactenos ul {
+    padding-left: 0px;
+  }
+  
+  footer .title-footer {
+    font-weight: bold;
+    letter-spacing: 0.2 px;
+    cursor: default;
+    color: #ecf0f1;
+  }
+  
+  #acordion-footer .card-header {
+    background-color: rgb(67, 149, 209) !important;
+    padding-left: 0px;
+    padding: 0px;
+  }
+  
+  #acordion-footer a {
+    text-decoration: none;
+    list-style: none;
+    font-family: "Raleway", sans-serif !important;
+    font-size: 1.1rem;
+    margin-top: 0px;
+    color: #ecf0f1;
+    padding: 0px;
+    height: 40px !important;
+    cursor: pointer;
+  }
+  
+  footer .card-header a {
+    color: white;
+    cursor: pointer;
+  }
+  
+  footer .card-header a:hover {
+    border-bottom: 3px #282562 solid !important;
+    border-radius: 0px;
+  }
+  
+  footer .card-body p {
+    font-family: "Poppins", sans-serif;
+  }
+  
+  #acordion-footer .card {
+    border: none !important;
+  }
+
+ *{
+   box-sizing: border-box;
+   margin: 0;
+   padding: 0;
+ }
+
+ .buscar{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   position: absolute;
+   left: 50%;
+   top: 68%;
+   transform: translate(-50%,-50%);
+   background: #ffffff;
+   padding: 10px;
+   height: 55px;
+   border-radius: 50px;
+ }
+
+ .buscar_texto{
+   border: none;
+   background: none;
+   outline: none;
+   color: black;
+   font-size: 30px;
+   float: left;
+   line-height: 60px;
+   transition: .3s;
+   width: auto;
+ }
