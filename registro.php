@@ -1,3 +1,58 @@
+<?php
+require 'DataBase.php';
+
+if (!empty($_POST['email']) && !empty($_POST['nombre']) && !empty($_POST['apellido']) && !empty($_POST['cedula']) && !empty($_POST['telefono']) && !empty($_POST['clave']) && !empty($_POST['reclave'])) {
+    $nombre=$_POST['nombre'];
+    $cedula=$_POST['cedula'];
+    $telefono=$_POST['telefono'];
+    $genero=$_POST['genero'];
+    $fecha_nac=$_POST['fecha_nac'];
+    $email=$_POST['email'];
+    $clave=$_POST['clave'];
+    $password = password_hash($clave, PASSWORD_BCRYPT);
+    $s = "Select * from Usuario where Email = '$email'";
+    $sCed = "Select * from Usuario where Cedula = '$cedula'";
+    $result= mysqli_query($conn, $s);
+    $resultCed= mysqli_query($conn, $sCed);
+
+    
+   # $stmt = $conn->prepare($sql);
+
+    #$stmt->bindParam(':nombre', $_POST['nombre']);
+    #$stmt->bindParam(':apellido', $_POST['apellido']);
+    #$stmt->bindParam(':cedula', $_POST['cedula']);
+    #$stmt->bindParam(':telefono', $_POST['telefono']);
+    #$stmt->bindParam(':genero', $_POST['genero']);
+    #$stmt->bindParam(':email', $_POST['email']);
+   # $password = password_hash($_POST['clave'], PASSWORD_BCRYPT);
+   # $stmt->bindParam(':clave', $password);
+    
+    
+    # if ($stmt->execute()) {
+    #  $message = 'Successfully created new user';
+    #} else {
+    #  $message = 'Sorry there must have been an issue creating your account';
+    #}
+    $num= mysqli_num_rows($result);
+    $num2= mysqli_num_rows($resultCed);
+    if ($num == 1) {
+        echo "Este email ya esta registrado";
+    }if ($num2 == 1) {
+        echo "El numero de cedula ya esta en usó";
+    }if($num == 0 && $num2 == 0){
+      $sql = "INSERT INTO Usuario (nombre, Cedula, Telefono, Genero, FechaNacimiento, Email, Contraseña) VALUES ('$nombre', '$cedula', '$telefono', '$genero', '$fecha_nac', '$email', '$password')";
+    mysqli_query( $conn, $sql )  or die ( "Algo ha ido mal en la consulta a la base de datos");
+    echo "Registrado Correctamente";  
+    }
+    
+
+
+    }
+
+
+    mysqli_close($conn);
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,13 +74,13 @@
             </button>
             <div class="collapse navbar-collapse" id="expand">
                 <ul class="navbar-nav">                	
-                    <li class="nav-item"><a href="index.html" class="nav-link">Freelancer</a></li>                    
-                    <li class="nav-item"><a href="postular.html" class="nav-link">Postularse </a></li>                                                                             
+                    <li class="nav-item"><a href="index.php" class="nav-link">Freelancer</a></li>                    
+                    <li class="nav-item"><a href="postular.php" class="nav-link">Postularse </a></li>                                                                             
                     <div class="pull-right"> 
-                        <li class="nav-item"><a href="registro.html" class="nav-link"><i class="fas fa-user-plus"></i> Registrarse </a>                                            
+                        <li class="nav-item"><a href="registro.php" class="nav-link"><i class="fas fa-user-plus"></i> Registrarse </a>                                            
                     </div>    
                     <div class="pull-right">
-                        <li class="nav-item"><a href="login.html" class="nav-link"><i class="fa fa-sign-in"></i> Ingresar </a>                        
+                        <li class="nav-item"><a href="login.php" class="nav-link"><i class="fa fa-sign-in"></i> Ingresar </a>                        
                     </div>                
                 </ul>
             </div>            
@@ -36,7 +91,7 @@
 <div class="row row-cols-3 row-cols-sm-3 row-cols-md-2">
     <div class="col-md-3 col-sm-2 col-1"></div>
     <div class="col-md-6 col-sm-8 col-10 marco-form ">
-        <h2 class=" login-title text-center">Postularse como freelancer</h2>
+        <h2 class=" login-title text-center">Registrarse</h2>
 
         <div class="login-message text-center">
             ¿Ya tienes una cuenta?
@@ -47,7 +102,7 @@
         <div class="inputs-forms">
             <br>
             <!-- En action usamos $_SERVER para que los datos del form se envien a la vista en la que se encuentra -->
-            <form method="POST" action="<?php $_SERVER['PHP_SELF'] ?>" role="form" id="form-register" onsubmit="verificarcaptcha()">
+            <form method="POST" action="registro.php" role="form" id="form-register" onsubmit="verificarcaptcha()">
                 <div class="informacion">
                     <div class="form-group">
                         <label for="nombre">Nombres</label>
@@ -68,10 +123,7 @@
                         <label for="telefono">Teléfono</label>
                         <input id="telefono" class="form-control" type="number" name="telefono" min="0">
                     </div>
-                    <div class="form-group">
-                        <label for="descripcion">descripcion de sus conocimientos</label>
-                        <input type="text" class="form-control" id="descripcion" name="descripcion">
-                    </div>                    
+
                     <div class="form-group genero mb-0">
                         <label style="width: 100%" class="mb-0">Seleccione su género</label>
                         <div class="radios" style="width: 100%">

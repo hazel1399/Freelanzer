@@ -1,0 +1,121 @@
+CREATE TABLE Cliente (
+	IdCliente int NOT null AUTO_INCREMENT,
+    Nombre varchar(60) not null,
+    Genero CHARACTER not null,
+    FechaNacimiento Date not null,
+    calificacion int not null,
+    CONSTRAINT PK_Cliente PRIMARY KEY (IdCliente)
+    
+);
+
+CREATE TABLE Usuario(
+	IdUsuario int NOT null AUTO_INCREMENT,
+	Nombre varchar(60) not null,
+	Cedula int not null,
+	Telefono int not null,
+	Genero CHARACTER not null,
+	FechaNacimiento Date ,
+	Email varchar(60) not null,
+	Contraseña varchar(60) not null,
+	CalificacionVende double,
+	CalificacionCliente double,
+	Ubicacion varchar(30),
+	CampoLaboral varchar(30),
+	CuentaBanco int,
+	CONSTRAINT Pk_Usuario PRIMARY KEY (IdUsuario)
+
+);
+
+CREATE TABLE SolicitudServicioCliente(
+	IdSolicitudSC int not null AUTO_INCREMENT,
+    NumSolicitud int not null,
+    CampoLaboral CHARACTER not null,
+    Descripcion varchar(60) not null,
+    FechaPublicacion date,
+    FechaMaxPlazo Date,
+    CONSTRAINT Pk_solicitudSC PRIMARY KEY (IdsolicitudSC)
+);
+
+
+CREATE TABLE Freelancer (
+	IdFreelancer int not null AUTO_INCREMENT,
+    Ubicacion varchar(30),
+    CampoLaboral varchar(20),
+    ExpIni date,
+    ExpFin date,
+    CuentaBanco int,
+    Calificacion int,
+    CONSTRAINT Pk_Freelancer PRIMARY KEY (IdFreelancer)
+);
+
+create table OfertaFreelancer(
+	Id int not null AUTO_INCREMENT,
+    CampoLaboral varchar(20),
+    Titulo varchar (30),
+    Descripcion varchar(100),
+    FechaPublicacion date,
+    fk_IdFree int,
+    CONSTRAINT Pk_OfertaFreelancer PRIMARY KEY (Id),
+    CONSTRAINT Fk_FreeOferFree FOREIGN KEY (fk_IdFree)
+    REFERENCES Freelancer(IdFreelancer)
+);
+
+create table Estudios(
+	Id int not null AUTO_INCREMENT,
+    Titulo varchar(60) not null,
+    Fecha date,
+    Institucion varchar(60),
+    CONSTRAINT Pk_estudios PRIMARY KEY (Id)
+);
+
+CREATE TABLE Pago(
+	IdPago int not null AUTO_INCREMENT,
+    numCuenta int,
+    valor double,
+    metodo CHARACTER,
+    Entidad varchar(60),
+    Estado varchar(60),
+    CONSTRAINT Pk_Pago PRIMARY KEY (IdPago)
+);
+
+
+
+
+CREATE table contrato (
+	IdContrato int not null AUTO_INCREMENT,
+    valor double,
+    FechaComienzo date,
+    FechaTermino date,
+    PlazoDisponible int,
+    Condiciones varchar(60),
+    Estado CHARACTER,
+    CONSTRAINT Pk_contrato PRIMARY KEY (IdContrato)
+);
+
+create table PQR(
+	IdPqr int not null AUTO_INCREMENT,
+    NumRadicado int,
+    FechaDePost date,
+    FechaMazResp date,
+    Clasificacion CHARACTER,
+    Motivo CHARACTER,
+    Descripcion varchar(100),
+    Estado CHARACTER,
+    CONSTRAINT Pk_Pqr PRIMARY KEY (IdPqr)    
+);
+
+CREATE TABLE Admin (
+	IdAdmin int not null AUTO_INCREMENT,
+    CodigoAppFreelanzer int,
+    CONSTRAINT Pk_Admin PRIMARY KEY (IdAdmin)
+);
+
+CREATE TABLE ReporteContrato (
+	IdReportContrato int not null AUTO_INCREMENT,
+    NumRadicado int,
+    FechaPostulacion date,
+    FechaMaxRespuesta date,
+    Motivo CHARACTER,
+    Descripcion varchar(60),
+    CONSTRAINT Pk_ReporteContrato PRIMARY KEY (IdReportContrato)    
+);

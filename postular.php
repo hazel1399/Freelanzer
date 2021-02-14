@@ -19,13 +19,13 @@
             </button>
             <div class="collapse navbar-collapse" id="expand">
                 <ul class="navbar-nav">                	
-                    <li class="nav-item"><a href="index.html" class="nav-link">Freelancer</a></li>                    
-                    <li class="nav-item"><a href="postular.html" class="nav-link">Postularse </a></li>                                                                             
+                    <li class="nav-item"><a href="index.php" class="nav-link">Freelancer</a></li>                    
+                    <li class="nav-item"><a href="postular.php" class="nav-link">Postularse </a></li>                                                                             
                     <div class="pull-right"> 
-                        <li class="nav-item"><a href="registro.html" class="nav-link"><i class="fas fa-user-plus"></i> Registrarse </a>                                            
+                        <li class="nav-item"><a href="registro.php" class="nav-link"><i class="fas fa-user-plus"></i> Registrarse </a>                                            
                     </div>    
                     <div class="pull-right">
-                        <li class="nav-item"><a href="login.html" class="nav-link"><i class="fa fa-sign-in"></i> Ingresar </a>                        
+                        <li class="nav-item"><a href="login.php" class="nav-link"><i class="fa fa-sign-in"></i> Ingresar </a>                        
                     </div>                
                 </ul>
             </div>            
@@ -36,7 +36,7 @@
 <div class="row row-cols-3 row-cols-sm-3 row-cols-md-2">
     <div class="col-md-3 col-sm-2 col-1"></div>
     <div class="col-md-6 col-sm-8 col-10 marco-form ">
-        <h2 class=" login-title text-center">Registrarse</h2>
+        <h2 class=" login-title text-center">Postularse como freelancer</h2>
 
         <div class="login-message text-center">
             ¿Ya tienes una cuenta?
@@ -68,7 +68,10 @@
                         <label for="telefono">Teléfono</label>
                         <input id="telefono" class="form-control" type="number" name="telefono" min="0">
                     </div>
-
+                    <div class="form-group">
+                        <label for="descripcion">descripcion de sus conocimientos</label>
+                        <input type="text" class="form-control" id="descripcion" name="descripcion">
+                    </div>                    
                     <div class="form-group genero mb-0">
                         <label style="width: 100%" class="mb-0">Seleccione su género</label>
                         <div class="radios" style="width: 100%">

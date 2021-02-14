@@ -1,3 +1,8 @@
+<?php
+require 'DataBase.php';
+   # mysqli_close($conn);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,13 +23,13 @@
             </button>
             <div class="collapse navbar-collapse" id="expand">
                 <ul class="navbar-nav">                	
-                    <li class="nav-item"><a href="index.html" class="nav-link">Freelancer</a></li>
-                    <li class="nav-item"><a href="postular.html" class="nav-link">Postularse</a></li>                                                                                             
+                    <li class="nav-item"><a href="index.php" class="nav-link">Freelancer</a></li>
+                    <li class="nav-item"><a href="postular.php" class="nav-link">Postularse</a></li>                                                                                             
                     <div class="pull-right"> 
-                        <li class="nav-item"><a href="registro.html" class="nav-link"><i class="fas fa-user-plus"></i> Registrarse </a>                                            
+                        <li class="nav-item"><a href="registro.php" class="nav-link"><i class="fas fa-user-plus"></i> Registrarse </a>                                            
                     </div>    
                     <div class="pull-right">
-                        <li class="nav-item"><a href="login.html" class="nav-link"><i class="fa fa-sign-in"></i> Ingresar </a>                        
+                        <li class="nav-item"><a href="login.php" class="nav-link"><i class="fa fa-sign-in"></i> Ingresar </a>                        
                     </div>                
                 </ul>
             </div>            
@@ -62,7 +67,7 @@
             </div>
             <div class="buscar">
                 <input type="text" class="buscar_texto" placeholder="  Escribe lo que buscas ">
-                <a href="buscador.html" class="boton">
+                <a href="buscador.php" class="boton">
                     <i class="fas fa-search"></i>
                 </a>
             </div>
