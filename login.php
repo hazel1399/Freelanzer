@@ -5,19 +5,26 @@ if (!empty($_POST['username']) && !empty($_POST['password']) ) {
     $email=$_POST['username'];
     $password=$_POST['password'];
     $s = "Select * from Usuario where Email = '$email'";
-    
+
     $result= mysqli_query($conn, $s);
    
     $num= mysqli_num_rows($result);
    
     if ($num == 0) {
         echo "El email no esta registrado";
-    }
+    }else{
     $row= mysqli_fetch_assoc($result);
     $hash=$row['Contraseña'];
+    $Banco=$row['CuentaBanco'];
+
     if(password_verify($password, $hash)){
     session_start();
     $_SESSION['Email']=$row['Email'];
+    $_SESSION['IdUsuario']=$row['IdUsuario'];
+    if ($Banco!='') {
+        $_SESSION['Banco']=$row['CuentaBanco'];
+    }
+    
     header("Location: index.php"); 
     #die();
     echo "Inicio sesion Correctamente";
@@ -25,7 +32,7 @@ if (!empty($_POST['username']) && !empty($_POST['password']) ) {
         echo "Credenciales incorrectas, porfavor intentelo nuevamente";
     }
     }
-
+}
 
     mysqli_close($conn);
 ?>

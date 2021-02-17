@@ -1,3 +1,24 @@
+<?php
+require 'DataBase.php';
+   # mysqli_close($conn);
+session_start();
+if(isset($_SESSION['Email'])){
+    #echo("Inicio sesion correctamente   ". $_SESSION['Email']);
+    if (!empty($_POST['pais']) && !empty($_POST['campo'])  && !empty($_POST['banco'])){
+        $pais=$_POST['pais'];
+        $campo=$_POST['campo'];
+        $banco=$_POST['banco'];
+        $Email=$_SESSION['Email'];
+        $sql = "UPDATE Usuario SET Ubicacion= '$pais', CampoLaboral= '$campo', CuentaBanco= '$banco' WHERE Email='$Email'";
+        mysqli_query( $conn, $sql )  or die ( "Algo ha ido mal en la consulta a la base de datos");
+    echo "Registrado Correctamente";
+    $_SESSION['Banco']=$banco;
+    header("Location: index.php");  
+    }
+}else{
+    echo "no inicio sesion";
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,21 +33,36 @@
     <script src="https://kit.fontawesome.com/9d5cbf4e8e.js" crossorigin="anonymous"></script>
 </head>
 <body>  
-	 <header>
+     <header>
         <nav class="navbar navbar-expand-sm bg-info  navbar-dark">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#expand">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="expand">
-                <ul class="navbar-nav">                	
-                    <li class="nav-item"><a href="index.php" class="nav-link">Freelancer</a></li>                    
-                    <li class="nav-item"><a href="postular.php" class="nav-link">Postularse </a></li>                                                                             
+                <ul class="navbar-nav">                 
+                    <li class="nav-item"><a href="index.php" class="nav-link">Freelancer</a></li>
+                    <?php if (isset($_SESSION['Email']) AND !isset($_SESSION['Banco'])) {?>
+                    <li class="nav-item"><a href="postular.php" class="nav-link">Postularse</a></li> <?php } ?>
+
+
+
+                    <?php if (isset($_SESSION['Email']) AND isset($_SESSION['Banco'])) {?>
+                    <li class="nav-item"><a href="Ofertar.php" class="nav-link">Ofertar</a></li> 
+                    <li class="nav-item"><a href="MiOfertas.php" class="nav-link">Mis ofertas</a></li> 
+                <?php } ?>
+
+
+                     <?php if (!isset($_SESSION['Email'])) {?>                                                                                              
                     <div class="pull-right"> 
                         <li class="nav-item"><a href="registro.php" class="nav-link"><i class="fas fa-user-plus"></i> Registrarse </a>                                            
                     </div>    
-                    <div class="pull-right">
+                    <div class="pull-right" id="Ingresar" >
                         <li class="nav-item"><a href="login.php" class="nav-link"><i class="fa fa-sign-in"></i> Ingresar </a>                        
-                    </div>                
+                    </div><?php } ?>  
+                    <?php if (isset($_SESSION['Email'])) {?>
+                    <div class="pull-right">
+                        <li class="nav-item"><a href="logout.php" class="nav-link"><i class="fa fa-sign-in"></i> Cerrar sesion </a>                        
+                    </div> <?php } ?>               
                 </ul>
             </div>            
         </nav>        
@@ -47,68 +83,27 @@
         <div class="inputs-forms">
             <br>
             <!-- En action usamos $_SERVER para que los datos del form se envien a la vista en la que se encuentra -->
-            <form method="POST" action="<?php $_SERVER['PHP_SELF'] ?>" role="form" id="form-register" onsubmit="verificarcaptcha()">
+            <form method="POST" action="postular.php" role="form" id="form-register" onsubmit="verificarcaptcha()">
                 <div class="informacion">
                     <div class="form-group">
-                        <label for="nombre">Nombres</label>
-                        <input type="text" class="form-control" id="nombre" name="nombre">
+                        <label for="pais">Pais</label>
+                        <input type="text" class="form-control" id="pais" name="pais">
                     </div>
 
                     <div class="form-group">
-                        <label for="apellido">Apellidos</label>
-                        <input type="text" class="form-control" id="apellido" name="apellido">
+                        <label for="campo">Campo Laboral</label>
+                        <input type="text" class="form-control" id="campo" name="campo">
                     </div>
 
                     <div class="form-group">
-                        <label for="cedula">Cédula</label>
-                        <input type="number" class="form-control" id="cedula" name="cedula" min="0">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="telefono">Teléfono</label>
-                        <input id="telefono" class="form-control" type="number" name="telefono" min="0">
+                        <label for="banco">Numero de cuenta bancaria</label>
+                        <input type="number" class="form-control" id="banco" name="banco" min="4">
                     </div>
                     <div class="form-group">
-                        <label for="descripcion">descripcion de sus conocimientos</label>
+                        <label for="descripcion">Descripcion de sus conocimientos</label>
                         <input type="text" class="form-control" id="descripcion" name="descripcion">
                     </div>                    
-                    <div class="form-group genero mb-0">
-                        <label style="width: 100%" class="mb-0">Seleccione su género</label>
-                        <div class="radios" style="width: 100%">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="genero" id="masculino" value="M">
-                                <label class="form-check-label" for="inlineRadio1">Masculino</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="genero" id="femenino" value="F">
-                                <label class="form-check-label" for="inlineRadio2">Femenino</label>
-                            </div>                            
-                        </div>
-                    </div>
-
-                    <div class="form-group mt-2">
-                        <label for="fecha_nac">Fecha de nacimiento</label>
-                        <input type="date" id="fecha_nac" class="form-control" name="fecha_nac">
-                    </div>
-                </div>
-                <div class="claves">
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input id="email" class="form-control" type="email" name="email">
-                    </div>
-                    <div class="form-group mb-0">
-                        <label for="clave">Contraseña</label>
-                    </div>
-                    <div class="form-group" style="position: relative">
-                        <input id="clave" class="form-control" type="password" name="clave"
-                            placeholder="Contraseña nueva">
-                        <i class="fa fa-eye btn-show-hide-pwd" data-for="clave"></i>
-                    </div>
-                    <div class="form-group" style="position: relative">
-                        <input id="reclave" class="form-control" type="password" name="reclave"
-                            placeholder="Repita la contraseña">
-                        <i class="fa fa-eye btn-show-hide-pwd" data-for="reclave"></i>
-                    </div>
+                    
                     <div aling="center " class="g-recaptcha" data-theme="dark"
                         data-sitekey="6LfMydkUAAAAAJ-7II57ff7mCdJ-G45XIvFv44NX"></div>
                 </div>

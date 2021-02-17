@@ -42,7 +42,8 @@ if (!empty($_POST['email']) && !empty($_POST['nombre']) && !empty($_POST['apelli
     }if($num == 0 && $num2 == 0){
       $sql = "INSERT INTO Usuario (nombre, Cedula, Telefono, Genero, FechaNacimiento, Email, Contraseña) VALUES ('$nombre', '$cedula', '$telefono', '$genero', '$fecha_nac', '$email', '$password')";
     mysqli_query( $conn, $sql )  or die ( "Algo ha ido mal en la consulta a la base de datos");
-    echo "Registrado Correctamente";  
+    echo "Registrado Correctamente";
+    header("Location: login.php");   
     }
     
 
@@ -73,19 +74,23 @@ if (!empty($_POST['email']) && !empty($_POST['nombre']) && !empty($_POST['apelli
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="expand">
-                <ul class="navbar-nav">                	
-                    <li class="nav-item"><a href="index.php" class="nav-link">Freelancer</a></li>                    
-                    <li class="nav-item"><a href="postular.php" class="nav-link">Postularse </a></li>                                                                             
+                <ul class="navbar-nav">                 
+                    <li class="nav-item"><a href="index.php" class="nav-link">Freelancer</a></li>
+                    <?php if (isset($_SESSION['Email'])) {?>
+                    <li class="nav-item"><a href="postular.php" class="nav-link">Postularse</a></li> <?php } ?>                                                                                               
                     <div class="pull-right"> 
                         <li class="nav-item"><a href="registro.php" class="nav-link"><i class="fas fa-user-plus"></i> Registrarse </a>                                            
                     </div>    
-                    <div class="pull-right">
+                    <div class="pull-right" id="Ingresar" >
                         <li class="nav-item"><a href="login.php" class="nav-link"><i class="fa fa-sign-in"></i> Ingresar </a>                        
-                    </div>                
+                    </div><?php if (isset($_SESSION['Email'])) {?>
+                    <div class="pull-right">
+                        <li class="nav-item"><a href="logout.php" class="nav-link"><i class="fa fa-sign-in"></i> Cerrar sesion </a>                        
+                    </div> <?php } ?>               
                 </ul>
             </div>            
         </nav>        
-    </header>    
+    </header>        
 <br>	
 </body>
 <div class="row row-cols-3 row-cols-sm-3 row-cols-md-2">

@@ -1,3 +1,21 @@
+<?php
+require 'DataBase.php';
+   # mysqli_close($conn);
+session_start();
+if(isset($_SESSION['Email'])){
+    echo("Inicio sesion correctamente   ". $_SESSION['Email']);
+}else{
+    echo "no inicio sesion";
+}
+$Id=$_SESSION['IdUsuario'];
+$s = "Select * from OfertaFreelancer INNER JOIN Usuario ON OfertaFreelancer.fk_IdFree=Usuario.IdUsuario where fk_IdFree = '$Id'";
+$result= mysqli_query($conn, $s);
+
+
+   
+$num= mysqli_num_rows($result);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,90 +29,73 @@
     <script src="https://kit.fontawesome.com/9d5cbf4e8e.js" crossorigin="anonymous"></script>
 </head>
 <body>  
-	 <header>
+	 	 <header>
         <nav class="navbar navbar-expand-sm bg-info  navbar-dark">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#expand">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="expand">
                 <ul class="navbar-nav">                	
-                    <li class="nav-item"><a href="index.php" class="nav-link">Freelancer</a></li>                    
-                    <li class="nav-item"><a href="postular.php" class="nav-link">postularse </a></li>                                                                             
-                    <li class="nav-item"><a href="registrarse.php" class="nav-link">
-                      <i class="fas fa-user-plus"></i> Registrarse </a>                    
-                    <li class="nav-item"><a href="login.php" class="nav-link">
-                      <i class="fa fa-sign-in"></i> Ingresar </a>                        
+                    <li class="nav-item"><a href="index.php" class="nav-link">Freelancer</a></li>
+                    <?php if (isset($_SESSION['Email']) AND !isset($_SESSION['Banco'])) {?>
+                    <li class="nav-item"><a href="postular.php" class="nav-link">Postularse</a></li> <?php } ?>
+
+
+
+                    <?php if (isset($_SESSION['Email']) AND isset($_SESSION['Banco'])) {?>
+                    <li class="nav-item"><a href="Ofertar.php" class="nav-link">Ofertar</a></li> 
+                    <li class="nav-item"><a href="MiOfertas.php" class="nav-link">Mis ofertas</a></li> 
+                <?php } ?>
+
+
+                     <?php if (!isset($_SESSION['Email'])) {?>                                                                                              
+                    <div class="pull-right"> 
+                        <li class="nav-item"><a href="registro.php" class="nav-link"><i class="fas fa-user-plus"></i> Registrarse </a>                                            
+                    </div>    
+                    <div class="pull-right" id="Ingresar" >
+                        <li class="nav-item"><a href="login.php" class="nav-link"><i class="fa fa-sign-in"></i> Ingresar </a>                        
+                    </div><?php } ?>  
+                    <?php if (isset($_SESSION['Email'])) {?>
+                    <div class="pull-right">
+                        <li class="nav-item"><a href="logout.php" class="nav-link"><i class="fa fa-sign-in"></i> Cerrar sesion </a>                        
+                    </div> <?php } ?>               
                 </ul>
             </div>            
         </nav>        
-    </header>    
+    </header>   
 <br>
+<?php
 
+for ($i=0; $i < $num ; $i++) { 
+	$row=mysqli_fetch_assoc($result);
+$titulo=$row['Titulo'];
+$precio=$row['Precio'];
+$fechaP=$row['FechaPublicacion'];
+$ubicacion=$row['Ubicacion'];
+?>
 <div class="container mt-3" style="border: 0px white">                               
         <div class="container mt-3">            
                 <table style="width: 50%;">
                     <tr>
                         <td>
-                            <a href="prueba.html" class="nav-link"> <img src="http://simon.uis.edu.co/reddinamica/assets/images/logouis.png" alt="logo" width="80px" height="100%"></a> </div>                         
+                            <a href="prueba.html" > <img src="http://simon.uis.edu.co/reddinamica/assets/images/logouis.png" alt="logo" width="80px" height="70px"></a>                      
                         </td>
                         <td>    
-                            Docente de Tecnología e informática         
+                            <?php echo $titulo;     ?>         
                             <br>
-                            Medellín, Antioquia, Colombia               
-                            <i class="far fa-money-bill-alt"></i> $550.000 - $720.000 al mes                                                                      
+                            <?php echo $ubicacion;     ?>             
+                            <i class="far fa-money-bill-alt"></i>$<?php echo $precio;  ?>                                                                      
                         </td>    
                         <td>
                             <!-- Job Category -->                                                                                        
-                            Publicado en 27 de enero de 2021                
+                            Publicado el:      <br>  <?php echo $fechaP;     ?>                
                         </td>
                     </tr>
                 </table>            
         </div>
 </div>
+<?php } ?>
 
-<div class="container mt-3">
-    <div class="container mt-3">
-        <table style="width: 50%;">
-            <tr>
-                <td>
-                    <a href="prueba.html" class="nav-link"> <img src="http://simon.uis.edu.co/reddinamica/assets/images/logouis.png" alt="logo" width="80px" height="100%"></a> </div>                         
-                </td>
-                <td>    
-                    Programador web        
-                    <br>
-                    Cundinamarca, Bogotá, Colombia               
-                    <i class="far fa-money-bill-alt"></i> $2.500.000 al mes                                                                      
-                </td>    
-                <td>
-                    <!-- Job Category -->                                        
-                    Publicado en 29 de enero de 2021                
-                </td>
-            </tr>
-        </table>
-    </div>    
-</div>
-
-<div class="container mt-3">
-    <div class="container mt-3">
-        <table style="width: 50%;">
-            <tr>
-                <td>
-                    <a href="prueba.html" class="nav-link"> <img src="http://simon.uis.edu.co/reddinamica/assets/images/logouis.png" alt="logo" width="80px" height="100%"></a> </div>                         
-                </td>
-                <td>    
-                    Asesor Marketing    
-                    <br>
-                    Jalisco, Mexico               
-                    <i class="far fa-money-bill-alt"></i> $8.000 al mes                                                                      
-                </td>    
-                <td>
-                    <!-- Job Category -->                                        
-                    Publicado en 31 de enero de 2021                
-                </td>
-            </tr>
-        </table>
-    </div>    
-</div>
 </body>
 </div>
 <footer>

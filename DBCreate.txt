@@ -50,14 +50,14 @@ CREATE TABLE Freelancer (
 
 create table OfertaFreelancer(
 	Id int not null AUTO_INCREMENT,
-    CampoLaboral varchar(20),
+    Precio double,
     Titulo varchar (30),
     Descripcion varchar(100),
     FechaPublicacion date,
     fk_IdFree int,
     CONSTRAINT Pk_OfertaFreelancer PRIMARY KEY (Id),
     CONSTRAINT Fk_FreeOferFree FOREIGN KEY (fk_IdFree)
-    REFERENCES Freelancer(IdFreelancer)
+    REFERENCES Usuario(IdUsuario)
 );
 
 create table Estudios(

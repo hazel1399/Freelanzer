@@ -1,102 +1,121 @@
+<?php
+require 'DataBase.php';
+   # mysqli_close($conn);
+session_start();
+if(isset($_SESSION['Email'])){
+    #echo("Inicio sesion correctamente   ". $_SESSION['Email']);
+    if (!empty($_POST['titulo']) && !empty($_POST['descripcion'])  && !empty($_POST['precio'])){
+        $titulo=$_POST['titulo'];
+        $descripcion=$_POST['descripcion'];
+        $Id=$_SESSION['IdUsuario'];
+        $precio=$_POST['precio'];
+        #$FechaPublicacion='select CURDATE();';
+        $sql = "INSERT INTO OfertaFreelancer (precio, titulo, descripcion, FechaPublicacion, fk_IdFree) VALUES ('$precio', '$titulo', '$descripcion', CURDATE(), '$Id')";
+        mysqli_query( $conn, $sql )  or die ( "Algo ha ido mal en la consulta a la base de datos");
+    echo "Registrado Correctamente";
+    header("Location: index.php");  
+    }
+}else{
+    echo "no inicio sesion";
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">    
     <title>Freelanzer</title>
-    <link rel="stylesheet" href="assets/css/style.css"> 
+    <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/9d5cbf4e8e.js" crossorigin="anonymous"></script>
 </head>
 <body>  
-	 <header>
+	    <header>
         <nav class="navbar navbar-expand-sm bg-info  navbar-dark">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#expand">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="expand">
-                <ul class="navbar-nav">                	
-                    <li class="nav-item"><a href="index.php" class="nav-link">Freelancer</a></li>                    
-                    <li class="nav-item"><a href="postular.php" class="nav-link">postularse </a></li>                                                                             
-                    <li class="nav-item"><a href="registrarse.php" class="nav-link">
-                      <i class="fas fa-user-plus"></i> Registrarse </a>                    
-                    <li class="nav-item"><a href="login.php" class="nav-link">
-                      <i class="fa fa-sign-in"></i> Ingresar </a>                        
+                <ul class="navbar-nav">                 
+                    <li class="nav-item"><a href="index.php" class="nav-link">Freelancer</a></li>
+                    <?php if (isset($_SESSION['Email']) AND !isset($_SESSION['Banco'])) {?>
+                    <li class="nav-item"><a href="postular.php" class="nav-link">Postularse</a></li> <?php } ?>
+
+
+
+                    <?php if (isset($_SESSION['Email']) AND isset($_SESSION['Banco'])) {?>
+                    <li class="nav-item"><a href="Ofertar.php" class="nav-link">Ofertar</a></li> 
+                    <li class="nav-item"><a href="MiOfertas.php" class="nav-link">Mis ofertas</a></li> 
+                <?php } ?>
+
+
+                     <?php if (!isset($_SESSION['Email'])) {?>                                                                                              
+                    <div class="pull-right"> 
+                        <li class="nav-item"><a href="registro.php" class="nav-link"><i class="fas fa-user-plus"></i> Registrarse </a>                                            
+                    </div>    
+                    <div class="pull-right" id="Ingresar" >
+                        <li class="nav-item"><a href="login.php" class="nav-link"><i class="fa fa-sign-in"></i> Ingresar </a>                        
+                    </div><?php } ?>  
+                    <?php if (isset($_SESSION['Email'])) {?>
+                    <div class="pull-right">
+                        <li class="nav-item"><a href="logout.php" class="nav-link"><i class="fa fa-sign-in"></i> Cerrar sesion </a>                        
+                    </div> <?php } ?>               
                 </ul>
             </div>            
         </nav>        
     </header>    
-<br>
+<br>	
+</body>
+<div class="row row-cols-3 row-cols-sm-3 row-cols-md-2">
+    <div class="col-md-3 col-sm-2 col-1"></div>
+    <div class="col-md-6 col-sm-8 col-10 marco-form ">
+        <h2 class=" login-title text-center">Publicar una oferta</h2>
 
-<div class="container mt-3" style="border: 0px white">                               
-        <div class="container mt-3">            
-                <table style="width: 50%;">
-                    <tr>
-                        <td>
-                            <a href="prueba.html" class="nav-link"> <img src="http://simon.uis.edu.co/reddinamica/assets/images/logouis.png" alt="logo" width="80px" height="100%"></a> </div>                         
-                        </td>
-                        <td>    
-                            Docente de Tecnología e informática         
-                            <br>
-                            Medellín, Antioquia, Colombia               
-                            <i class="far fa-money-bill-alt"></i> $550.000 - $720.000 al mes                                                                      
-                        </td>    
-                        <td>
-                            <!-- Job Category -->                                                                                        
-                            Publicado en 27 de enero de 2021                
-                        </td>
-                    </tr>
-                </table>            
+
+
+        <div class="inputs-forms">
+            <br>
+            <!-- En action usamos $_SERVER para que los datos del form se envien a la vista en la que se encuentra -->
+            <form method="POST" action="Ofertar.php" role="form" id="form-register" onsubmit="verificarcaptcha()">
+                <div class="informacion">
+                    <div class="form-group">
+                        <label for="titulo">Titulo</label>
+                        <input type="text" class="form-control" id="titulo" name="titulo">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="descripcion">Descripcion</label>
+                        <textarea rows="3" type="text" class="form-control" id="descripcion" name="descripcion"></textarea>
+                       
+                    </div>
+
+                    <div class="form-group">
+                        <label for="precio">Precio</label>
+                        <input type="number" class="form-control" id="precio" name="precio" min="4">
+                    </div>
+                 
+                    
+                    <div aling="center " class="g-recaptcha" data-theme="dark"
+                        data-sitekey="6LfMydkUAAAAAJ-7II57ff7mCdJ-G45XIvFv44NX"></div>
+                </div>
+                <button name="enviar" type="submit" class="btn btn-primary btn mt-3"
+                    style="width: 100%" >Registrar</button>
+            </form>
         </div>
-</div>
-
-<div class="container mt-3">
-    <div class="container mt-3">
-        <table style="width: 50%;">
-            <tr>
-                <td>
-                    <a href="prueba.html" class="nav-link"> <img src="http://simon.uis.edu.co/reddinamica/assets/images/logouis.png" alt="logo" width="80px" height="100%"></a> </div>                         
-                </td>
-                <td>    
-                    Programador web        
-                    <br>
-                    Cundinamarca, Bogotá, Colombia               
-                    <i class="far fa-money-bill-alt"></i> $2.500.000 al mes                                                                      
-                </td>    
-                <td>
-                    <!-- Job Category -->                                        
-                    Publicado en 29 de enero de 2021                
-                </td>
-            </tr>
-        </table>
-    </div>    
-</div>
-
-<div class="container mt-3">
-    <div class="container mt-3">
-        <table style="width: 50%;">
-            <tr>
-                <td>
-                    <a href="prueba.html" class="nav-link"> <img src="http://simon.uis.edu.co/reddinamica/assets/images/logouis.png" alt="logo" width="80px" height="100%"></a> </div>                         
-                </td>
-                <td>    
-                    Asesor Marketing    
-                    <br>
-                    Jalisco, Mexico               
-                    <i class="far fa-money-bill-alt"></i> $8.000 al mes                                                                      
-                </td>    
-                <td>
-                    <!-- Job Category -->                                        
-                    Publicado en 31 de enero de 2021                
-                </td>
-            </tr>
-        </table>
-    </div>    
+    </div>
+    <div class="col-md-3 col-sm-2 col-1"></div>
 </div>
 </body>
-</div>
+<br><br>
+<script type="text/javascript">
+$(document).ready(function() {
+$('.navbar-nav').find('a.active').removeClass('active');
+});
+</script>
+
 <footer>
     <div class="container">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 mb-0">
