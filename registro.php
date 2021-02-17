@@ -96,7 +96,7 @@ if (!empty($_POST['email']) && !empty($_POST['nombre']) && !empty($_POST['apelli
         <div class="login-message text-center">
             ¿Ya tienes una cuenta?
             <!-- <a href="#">Iniciar sesión</a> -->
-            <a href="index.html" data-dismiss="modal" data-toggle="modal" data-target="#modal-login">Login</a>
+            <a href="login.php" >Login</a>
         </div>
 
         <div class="inputs-forms">
