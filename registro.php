@@ -2,7 +2,8 @@
 require 'DataBase.php';
 
 if (!empty($_POST['email']) && !empty($_POST['nombre']) && !empty($_POST['apellido']) && !empty($_POST['cedula']) && !empty($_POST['telefono']) && !empty($_POST['clave']) && !empty($_POST['reclave'])) {
-    $nombre=$_POST['nombre'];
+    $nombre=$_POST['nombre']. " ";
+    $nombre.=$_POST['apellido'];
     $cedula=$_POST['cedula'];
     $telefono=$_POST['telefono'];
     $genero=$_POST['genero'];

@@ -64,14 +64,16 @@ $num= mysqli_num_rows($result);
         </nav>        
     </header>   
 <br>
+<h2 class=" login-title text-center">Tus ofertas activas:</h2>
 <?php
 
 for ($i=0; $i < $num ; $i++) { 
-	$row=mysqli_fetch_assoc($result);
+    $row=mysqli_fetch_assoc($result);
 $titulo=$row['Titulo'];
 $precio=$row['Precio'];
 $fechaP=$row['FechaPublicacion'];
 $ubicacion=$row['Ubicacion'];
+$nombre=$row['Nombre'];
 ?>
 <div class="container mt-3" style="border: 0px white">                               
         <div class="container mt-3">            
@@ -83,12 +85,21 @@ $ubicacion=$row['Ubicacion'];
                         <td>    
                             <?php echo $titulo;     ?>         
                             <br>
-                            <?php echo $ubicacion;     ?>             
-                            <i class="far fa-money-bill-alt"></i>$<?php echo $precio;  ?>                                                                      
+                                         
+                            <i class="far fa-money-bill-alt"></i>&nbsp; $<?php echo $precio;  ?>                                                                      
                         </td>    
                         <td>
                             <!-- Job Category -->                                                                                        
                             Publicado el:      <br>  <?php echo $fechaP;     ?>                
+                        </td>
+                        <td>
+                            <!-- Job Category -->                                                                                        
+                            Publicado por:      <br>  <?php echo $nombre ;     ?>
+
+                                         
+                        </td>
+                        <td>
+                        De:<br> <?php echo $ubicacion;     ?>    
                         </td>
                     </tr>
                 </table>            
