@@ -7,6 +7,13 @@ if(isset($_SESSION['Email'])){
 }else{
     echo "no inicio sesion";
 }
+if (!empty($_POST['idbuscar'])) {
+    $buscadortext=$_POST['idbuscar'];
+    header("Location: buscador.php?id=$buscadortext");
+}if (isset($_POST['enviar']) AND empty($_POST['idbuscar'])) {
+    $buscadortext=$_POST['idbuscar'];
+    header("Location: buscador.php?id=$buscadortext");
+}
 ?>
 
 <!DOCTYPE html>
@@ -86,12 +93,15 @@ if(isset($_SESSION['Email'])){
                 <span class="carousel-control-next-icon"></span>
               </a>
             </div>
+            <form method="POST" action="index.php" role="form" id="textbuscar" onsubmit="verificarcaptcha()">
             <div class="buscar">
-                <input type="text" class="buscar_texto" placeholder="  Escribe lo que buscas ">
-                <a href="buscador.php" class="boton">
-                    <i class="fas fa-search"></i>
-                </a>
+                
+                <input type="text" id="idbuscar" name="idbuscar" class="buscar_texto" placeholder="  Escribe lo que buscas ">
+                <button id="enviar" name="enviar" type="submit" class="btn btn-primary btn mt-3"
+                    style="width: 100%" >Buscar</button>    
+                   
             </div>
+            </form>
             </div>
     </div>
 </div>

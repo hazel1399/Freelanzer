@@ -1,9 +1,42 @@
 <?php
 require 'DataBase.php';
 session_start();
+if (!empty($_POST['idbuscar'])) {
+    $buscadortext=$_POST['idbuscar'];
+
+}if (isset($_POST['enviar']) AND empty($_POST['idbuscar'])) {
+    $buscadortext=$_POST['idbuscar'];
+
+}
 $Id=$_SESSION['IdUsuario'];
-$s = "Select * from OfertaFreelancer INNER JOIN Usuario ON OfertaFreelancer.fk_IdFree=Usuario.IdUsuario";
+
+if (isset($_GET['id'])) {
+    $busca=$_GET['id'];
+    $buscadortext=$busca;
+}
+
+if (!isset($_POST["filt"])) {
+    $s = "Select * from OfertaFreelancer INNER JOIN Usuario ON OfertaFreelancer.fk_IdFree=Usuario.IdUsuario where Titulo LIKE '%$busca%'";
+    $result= mysqli_query($conn, $s);
+}
+
+if (isset($_POST["filt"])) {
+    
+    $filtro=$_POST["filt"];
+
+    if ($filtro == 1) {
+
+    $s = "Select * from OfertaFreelancer INNER JOIN Usuario ON OfertaFreelancer.fk_IdFree=Usuario.IdUsuario where Titulo LIKE '%$buscadortext%'";
 $result= mysqli_query($conn, $s);
+}if ($filtro == 2) {
+
+    $s = "Select * from OfertaFreelancer INNER JOIN Usuario ON OfertaFreelancer.fk_IdFree=Usuario.IdUsuario where Usuario.Nombre LIKE '%$buscadortext%'";
+    $result= mysqli_query($conn, $s);
+}
+}
+
+
+
 
 
    
@@ -58,6 +91,24 @@ $num= mysqli_num_rows($result);
     </header>   
 <br>
 <h2 class=" login-title text-center">Ofertas disponibles</h2>
+<div >
+<form method="POST" action="buscador.php" role="form" id="textbuscar2" onsubmit="verificarcaptcha()">
+            
+                
+                <input type="text" id="idbuscar" name="idbuscar" class="buscar_texto" placeholder=<?php echo $buscadortext; ?>  >
+                            <div class="form-group">
+                    <select id="filt"  name="filt">             
+      <option value="1">Titulo</option>
+      <option value="2" >Freelancer</option>
+    </select>
+  </div><br>
+
+                <button name="enviar" type="submit" class="btn btn-primary btn mt-3"
+                    style="width: 20%" >Buscar</button>    
+                   
+
+            </form>
+            </div>
 <?php
 
 for ($i=0; $i < $num ; $i++) { 
