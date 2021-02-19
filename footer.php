@@ -8,7 +8,7 @@
                     <div class="card mb-2">
                         <div class="card-header" id="headingOne">
                             <a data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                Nicolás Galvan
+                                Nicolás Galván
                             </a>
                         </div>                       
                     </div>
@@ -22,14 +22,14 @@
                     <div class="card mb-2">
                         <div class="card-header" id="headingThree">
                             <a data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                Hazel Pinzon
+                                Hazel Pinzón
                             </a>
                         </div>                        
                     </div>
                     <div class="card mb-2">
                         <div class="card-header" id="headingFour">
                             <a data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                Julián Rodriguez
+                                Julián Rodríguez
                             </a>
                         </div>                        
                     </div>

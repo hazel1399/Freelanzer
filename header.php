@@ -27,7 +27,7 @@
                     </div><?php } ?>  
                     <?php if (isset($_SESSION['Email'])) {?>
                     <div class="pull-right">
-                        <li class="nav-item"><a href="logout.php" class="nav-link"><i class="fa fa-sign-in"></i> Cerrar sesion </a>                        
+                        <li class="nav-item"><a href="logout.php" class="nav-link"><i class="fa fa-sign-in"></i> Cerrar sesión </a>                        
                     </div> <?php } ?>               
                 </ul>
             </div>            

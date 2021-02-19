@@ -41,7 +41,7 @@ if(isset($_SESSION['Email'])){
                     </div>
 
                     <div class="form-group">
-                        <label for="descripcion">Descripcion</label>
+                        <label for="descripcion">Descripción</label>
                         <textarea rows="3" type="text" class="form-control" id="descripcion" name="descripcion"></textarea>
                        
                     </div>

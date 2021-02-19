@@ -16,7 +16,7 @@ if (!empty($_POST['idbuscar'])) {
 <div class="jumbotron text-center" id="jumbotron" style="border: 0px white">
     <div class="row">                           
         <div class="container">
-            <h2> ¿qué tipo de freelancer necesitas? </h2>
+            <h2> ¿Qué tipo de Freelancer necesitas? </h2>
             <div id="myCarousel" class="carousel slide mt-4" data-ride="carousel">
             
                             

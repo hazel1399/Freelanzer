@@ -71,10 +71,10 @@ $num = mysqli_num_rows($result);
     <thead>
         <tr>
             <th scope="col"></th>
-            <th scope="col">Descripcion</th>
+            <th scope="col">Descripción</th>
             <th scope="col">Publicado el:</th>
             <th scope="col">Publicado por:</th>
-            <th scope="col">Pais</th>
+            <th scope="col">País</th>
         </tr>
     </thead>
     <tbody>

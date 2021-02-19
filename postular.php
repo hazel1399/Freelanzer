@@ -25,7 +25,7 @@ if(isset($_SESSION['Email'])){
 <div class="row row-cols-3 row-cols-sm-3 row-cols-md-2">
     <div class="col-md-3 col-sm-2 col-1"></div>
     <div class="col-md-6 col-sm-8 col-10 marco-form ">
-        <h2 class=" login-title text-center">Postularse como freelancer</h2>
+        <h2 class=" login-title text-center">Postularse como Freelancer</h2>
 
         <div class="login-message text-center">
             ¿Ya tienes una cuenta?
@@ -39,7 +39,7 @@ if(isset($_SESSION['Email'])){
             <form method="POST" action="postular.php" role="form" id="form-register" onsubmit="verificarcaptcha()">
                 <div class="informacion">
                     <div class="form-group">
-                        <label for="pais">Pais</label>
+                        <label for="pais">País</label>
                         <input type="text" class="form-control" id="pais" name="pais">
                     </div>
 
@@ -49,11 +49,11 @@ if(isset($_SESSION['Email'])){
                     </div>
 
                     <div class="form-group">
-                        <label for="banco">Numero de cuenta bancaria</label>
+                        <label for="banco">Número de cuenta bancaria</label>
                         <input type="number" class="form-control" id="banco" name="banco" min="4">
                     </div>
                     <div class="form-group">
-                        <label for="descripcion">Descripcion de sus conocimientos</label>
+                        <label for="descripcion">Descripción de sus conocimientos</label>
                         <input type="text" class="form-control" id="descripcion" name="descripcion">
                     </div>                    
                     
