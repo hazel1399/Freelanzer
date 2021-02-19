@@ -13,11 +13,11 @@ if (!empty($_POST['idbuscar'])) {
 <?php include('head.php') ?>
 <?php include('header.php') ?>
 
-<div class="jumbotron text-center" style="border: 0px white">
+<div class="jumbotron text-center" id="jumbotron" style="border: 0px white">
     <div class="row">                           
-        <div class="container mt-3">
+        <div class="container">
             <h2> ¿qué tipo de freelancer necesitas? </h2>
-            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <div id="myCarousel" class="carousel slide mt-4" data-ride="carousel">
             
                             
               <!-- The slideshow -->
@@ -45,7 +45,7 @@ if (!empty($_POST['idbuscar'])) {
             <div class="buscar">
                 
                 <input type="text" id="idbuscar" name="idbuscar" class="buscar_texto" placeholder="  Escribe lo que buscas ">
-                <button id="enviar" name="enviar" type="submit" class="btn btn-primary btn mt-3"
+                <button id="enviar" name="enviar" type="submit" class="btn btn-primary btn"
                     style="width: 100%" >Buscar</button>    
                    
             </div>
