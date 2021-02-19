@@ -49,61 +49,68 @@ $num = mysqli_num_rows($result);
         <div class="form-group">
             <label for="exampleInputEmail1">Escribe lo que buscas</label>
             <textarea class="form-control" id="idbuscar" name="idbuscar" rows="1" placeholder=<?php echo $buscadortext; ?>></textarea>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="filt" id="filt" value="1" checked>
-            <label class="form-check-label" for="exampleRadios1">
-                Titulo
-            </label>
-        </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="filt" id="filt" value="1" checked>
+                <label class="form-check-label" for="exampleRadios1">
+                    Titulo
+                </label>
+            </div>
 
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="filt" id="filt" value="2">
-            <label class="form-check-label" for="exampleRadios1">
-                Freelancer
-            </label>
-        </div>
-        <button name="enviar" type="submit" class="btn btn-primary btn" style="width: 20%">Buscar</button>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="filt" id="filt" value="2">
+                <label class="form-check-label" for="exampleRadios1">
+                    Freelancer
+                </label>
+            </div>
+            <button name="enviar" type="submit" class="btn btn-primary btn" style="width: 20%">Buscar</button>
         </div>
     </form>
 </div>
 
-<?php
+<table class="table" id="table">
+    <thead>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">Descripcion</th>
+            <th scope="col">Publicado el:</th>
+            <th scope="col">Publicado por:</th>
+            <th scope="col">Pais</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
 
-for ($i = 0; $i < $num; $i++) {
-    $row = mysqli_fetch_assoc($result);
-    $titulo = $row['Titulo'];
-    $precio = $row['Precio'];
-    $fechaP = $row['FechaPublicacion'];
-    $ubicacion = $row['Ubicacion'];
-    $nombre = $row['Nombre'];
-?>
-    <div class="container mt-3" style="border: 0px white">
-        <div class="container mt-3">
-            <table style="width: 50%;">
-                <tr>
-                    <td>
-                        <a href="prueba.html"> <img src="http://simon.uis.edu.co/reddinamica/assets/images/logouis.png" alt="logo" width="80px" height="70px"></a>
-                    </td>
-                    <td>
-                        <?php echo $titulo;     ?>
-                        <br>
-                        <i class="far fa-money-bill-alt"></i>&nbsp; $<?php echo $precio;  ?>
-                    </td>
-                    <td>
-                        <!-- Job Category -->
-                        Publicado el: <br> <?php echo $fechaP;     ?>
-                    </td>
-                    <td>
-                        <!-- Job Category -->
-                        Publicado por: <br> <?php echo $nombre;     ?>
-                    </td>
-                    <td>
-                        De:<br> <?php echo $ubicacion;     ?>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
-<?php } ?>
+        for ($i = 0; $i < $num; $i++) {
+            $row = mysqli_fetch_assoc($result);
+            $titulo = $row['Titulo'];
+            $precio = $row['Precio'];
+            $fechaP = $row['FechaPublicacion'];
+            $ubicacion = $row['Ubicacion'];
+            $nombre = $row['Nombre'];
+        ?>
+            <tr>
+                <th scope="row">
+                    <a href="prueba.html"> <img src="http://simon.uis.edu.co/reddinamica/assets/images/logouis.png" alt="logo" width="80px" height="70px"></a>
+                </th>
+                <td>
+                    <?php echo $titulo;     ?>
+                    <br>
+                    <i class="far fa-money-bill-alt"></i>&nbsp; $<?php echo $precio;  ?>
+                </td>
+                <td>
+                    <!-- Job Category -->
+                    <?php echo $fechaP;     ?>
+                </td>
+                <td>
+                    <!-- Job Category -->
+                    <?php echo $nombre;     ?>
+                </td>
+                <td>
+                    <?php echo $ubicacion;     ?>
+                </td>
+            </tr>
+        <?php } ?>
+    </tbody>
+</table>
 
 <?php include('footer.php') ?>
