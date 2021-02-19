@@ -8,7 +8,7 @@ if (!empty($_POST['idbuscar'])) {
     $buscadortext=$_POST['idbuscar'];
 
 }
-$Id=$_SESSION['IdUsuario'];
+#$Id=$_SESSION['IdUsuario'];
 
 if (isset($_GET['id'])) {
     $busca=$_GET['id'];
@@ -34,11 +34,6 @@ $result= mysqli_query($conn, $s);
     $result= mysqli_query($conn, $s);
 }
 }
-
-
-
-
-
    
 $num= mysqli_num_rows($result);
 ?>

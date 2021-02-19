@@ -1,9 +1,7 @@
 <?php
 require 'DataBase.php';
-   # mysqli_close($conn);
 session_start();
 if(isset($_SESSION['Email'])){
-    #echo("Inicio sesion correctamente   ". $_SESSION['Email']);
     if (!empty($_POST['pais']) && !empty($_POST['campo'])  && !empty($_POST['banco'])){
         $pais=$_POST['pais'];
         $campo=$_POST['campo'];
@@ -69,12 +67,5 @@ if(isset($_SESSION['Email'])){
     </div>
     <div class="col-md-3 col-sm-2 col-1"></div>
 </div>
-
-<br><br>
-<script type="text/javascript">
-$(document).ready(function() {
-$('.navbar-nav').find('a.active').removeClass('active');
-});
-</script>
 
 <?php include('footer.php') ?>

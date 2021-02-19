@@ -16,43 +16,23 @@ if (!empty($_POST['email']) && !empty($_POST['nombre']) && !empty($_POST['apelli
     $result= mysqli_query($conn, $s);
     $resultCed= mysqli_query($conn, $sCed);
 
-    
-   # $stmt = $conn->prepare($sql);
-
-    #$stmt->bindParam(':nombre', $_POST['nombre']);
-    #$stmt->bindParam(':apellido', $_POST['apellido']);
-    #$stmt->bindParam(':cedula', $_POST['cedula']);
-    #$stmt->bindParam(':telefono', $_POST['telefono']);
-    #$stmt->bindParam(':genero', $_POST['genero']);
-    #$stmt->bindParam(':email', $_POST['email']);
-   # $password = password_hash($_POST['clave'], PASSWORD_BCRYPT);
-   # $stmt->bindParam(':clave', $password);
-    
-    
-    # if ($stmt->execute()) {
-    #  $message = 'Successfully created new user';
-    #} else {
-    #  $message = 'Sorry there must have been an issue creating your account';
-    #}
     $num= mysqli_num_rows($result);
     $num2= mysqli_num_rows($resultCed);
+
     if ($num == 1) {
         echo "Este email ya esta registrado";
-    }if ($num2 == 1) {
+    }
+    if ($num2 == 1) {
         echo "El numero de cedula ya esta en usó";
-    }if($num == 0 && $num2 == 0){
+    }
+    if($num == 0 && $num2 == 0){
       $sql = "INSERT INTO Usuario (nombre, Cedula, Telefono, Genero, FechaNacimiento, Email, Contraseña) VALUES ('$nombre', '$cedula', '$telefono', '$genero', '$fecha_nac', '$email', '$password')";
-    mysqli_query( $conn, $sql )  or die ( "Algo ha ido mal en la consulta a la base de datos");
-    echo "Registrado Correctamente";
-    header("Location: login.php");   
+      mysqli_query( $conn, $sql )  or die ( "Algo ha ido mal en la consulta a la base de datos");    
+      echo "Registrado Correctamente";
+      header("Location: login.php");   
     }
-    
-
-
-    }
-
-
-    mysqli_close($conn);
+}
+mysqli_close($conn);
 ?>
 
 <?php include('head.php') ?>
@@ -142,12 +122,5 @@ if (!empty($_POST['email']) && !empty($_POST['nombre']) && !empty($_POST['apelli
     </div>
     <div class="col-md-3 col-sm-2 col-1"></div>
 </div>
-</body>
-<br><br>
-<script type="text/javascript">
-$(document).ready(function() {
-$('.navbar-nav').find('a.active').removeClass('active');
-});
-</script>
 
 <?php include('footer.php') ?>

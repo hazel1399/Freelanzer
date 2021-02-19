@@ -1,12 +1,6 @@
 <?php
 require 'DataBase.php';
-   # mysqli_close($conn);
 session_start();
-if(isset($_SESSION['Email'])){
-    echo("Inicio sesion correctamente   ". $_SESSION['Email']);
-}else{
-    echo "no inicio sesion";
-}
 if (!empty($_POST['idbuscar'])) {
     $buscadortext=$_POST['idbuscar'];
     header("Location: buscador.php?id=$buscadortext");

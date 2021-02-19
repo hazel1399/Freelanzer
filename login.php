@@ -53,25 +53,11 @@ if (!empty($_POST['username']) && !empty($_POST['password']) ) {
                     <label for="password" class="font-weight-bold">Contraseña</label>
                     <input type="password" class="form-control" id="password" name="password" placeholder="Ingrese su contraseña">
                 </div>
-                <!-- <div class="form-group form-check">
-                    <input type="checkbox" name="check" id="check">
-                    <label for="check">Remember me</label>
-                </div> -->
                 <button href="index.php" name="submit" type="submit" class="btn btn-primary btn" style="width: 100%">Login</button>
             </form>
         </div>
         <div class="col-md-3"></div>
     </div>
 </div>
-
-<script type="text/javascript">
-    $(document).ready(function() {
-
-        try {
-            $('.navbar-nav').find('a.active').removeClass('active');
-        } catch (Exception $e) {}
-        
-    });
-</script>
     
 <?php include('footer.php') ?>

@@ -1,20 +1,10 @@
 <?php
 require 'DataBase.php';
-   # mysqli_close($conn);
 session_start();
-if(isset($_SESSION['Email'])){
-    echo("Inicio sesion correctamente   ". $_SESSION['Email']);
-}else{
-    echo "no inicio sesion";
-}
 $Id=$_SESSION['IdUsuario'];
 $s = "Select * from OfertaFreelancer INNER JOIN Usuario ON OfertaFreelancer.fk_IdFree=Usuario.IdUsuario where fk_IdFree = '$Id'";
 $result= mysqli_query($conn, $s);
-
-
-   
 $num= mysqli_num_rows($result);
-
 ?>
 
 <?php include('head.php') ?>
