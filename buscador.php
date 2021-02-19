@@ -90,7 +90,7 @@ $num = mysqli_num_rows($result);
         ?>
             <tr>
                 <th scope="row">
-                    <a href="prueba.html"> <img src="http://simon.uis.edu.co/reddinamica/assets/images/logouis.png" alt="logo" width="80px" height="70px"></a>
+                    <a href="prueba.html"> <img src="http://simon.uis.edu.co/reddinamica/assets/images/logouis.png" alt="logo" height=50px width=100px></a>
                 </th>
                 <td>
                     <?php echo $titulo;     ?>
